@@ -9,14 +9,13 @@ which nvim > /dev/null || { >&2 echo 'No nvim installation found' ; exit 1; }
 
 [ -f .zshrc ] && { >&2 echo 'Hey... you already have a zsh configuration'; exit 1; }
 
-echo "\tCopying .config"
+printf '\tCopying .config'
 cp -r .config/ ~/
-
-echo "\tCopying .local"
-cp -r .local/ ~/
 
 [ -f ~/.zprofile ] && ( echo '.zprofile already exists. Creating backup ~/.zprofile.bak' ; mv ~/.zprofile ~/.zprofile.bak )
 ln -s ~/.config/shell/profile ~/.zprofile
+
+source ~/.zprofile
 
 echo "\tInstalling oh-my-zsh"
 RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
